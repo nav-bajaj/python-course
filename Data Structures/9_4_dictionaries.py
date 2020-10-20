@@ -1,7 +1,7 @@
-#name = "mbox-short.txt"
+fname = input("Enter File Name: ")  
 
 
-handle = open("mbox-short.txt")
+handle = open(fname)
 senders = list()
 
 for line in handle :
@@ -26,3 +26,4 @@ for max_sender in senders :
 
 
 print(bigsendername, bigsender)
+
