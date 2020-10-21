@@ -2,7 +2,7 @@
 # http://www.py4e.com/code3/bs4.zip
 # and unzip it in the same directory as this file
 
-from urllib.request import urlopen
+import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import ssl
 
@@ -11,15 +11,11 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-url = "http://py4e-data.dr-chuck.net/comments_995415.html"
-html = urlopen(url, context=ctx).read()
-soup = BeautifulSoup(html, "html.parser")
-total = 0
+url = 'http://py4e-data.dr-chuck.net/known_by_Fikret.html'
+html = urllib.request.urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, 'html.parser')
+
 # Retrieve all of the anchor tags
-tags = soup('span')
+tags = soup('a')
 for tag in tags:
-    total = total + int(tag.contents[0])
-
-print(total)    
-
-
+    print(tag.get('href', None))
