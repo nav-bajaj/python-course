@@ -11,11 +11,30 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-url = 'http://py4e-data.dr-chuck.net/known_by_Fikret.html'
+url = 'http://py4e-data.dr-chuck.net/known_by_Maiah.html'
+urltemp = str()
+linknum = 18
 html = urllib.request.urlopen(url, context=ctx).read()
 soup = BeautifulSoup(html, 'html.parser')
-
+i=0
 # Retrieve all of the anchor tags
 tags = soup('a')
-for tag in tags:
-    print(tag.get('href', None))
+
+while i < 7 :
+    urltemp = str()
+    linknum = 18
+    html = urllib.request.urlopen(url, context=ctx).read()
+    soup = BeautifulSoup(html, 'html.parser')
+    
+# Retrieve all of the anchor tags
+    tags = soup('a')
+    for tag in tags[0:linknum]:
+        urltemp = tag.get('href', None)
+    url = urltemp
+    print(url)    
+    i = i+1
+        
+answer = url.split("_")
+name = answer[2].split(".")
+
+print(name[0])
